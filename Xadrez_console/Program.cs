@@ -15,25 +15,36 @@ namespace Xadrez_console
 
                 while (!partida.Terminada)
                 {
-                    Console.Clear();
-                    Tela.imprimirTabuleirio(partida.Tab);
+                    try
+                    {
+                        Console.Clear();
+                        Tela.imprimirTabuleirio(partida.Tab);
 
-                    Console.Write("\nOrigem: ");
-                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                        Console.WriteLine("\nTurno: " + partida.Turno);
+                        Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
 
-                    bool[,] posicoesPossiveis = partida.Tab.peca(origem).movimentosPossiveis();
+                        Console.Write("\nOrigem: ");
+                        Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeOrigem(origem);
 
-                    Console.Clear();
-                    Tela.imprimirTabuleirio(partida.Tab, posicoesPossiveis);
+                        bool[,] posicoesPossiveis = partida.Tab.peca(origem).movimentosPossiveis();
 
-                    Console.Write("\nDestino: ");
-                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                        Console.Clear();
+                        Tela.imprimirTabuleirio(partida.Tab, posicoesPossiveis);
 
-                    partida.executaMovimento(origem,destino);
+                        Console.Write("\nDestino: ");
+                        Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeDestino(origem,destino);
+
+                        partida.realizaJogada(origem, destino);
+                    }
+                    catch(TabuleiroException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
 
                 }
-
-
             }
             catch (TabuleiroException e)
             {
