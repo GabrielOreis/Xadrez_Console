@@ -38,7 +38,7 @@ namespace tabuleiro
         {
             return movimentosPossiveis()[pos.Linha,pos.Coluna];
         }
-            
+
         public void incrementarQteMovimentos()
         {
             QteMovimentos++;
