@@ -25,7 +25,7 @@ namespace tabuleiro
             {
                 for (int j = 0; j< Tab.Colunas;j++)
                 {
-                    if(mat[i,j] )
+                    if(mat[i,j])
                     {
                         return true;
                     }
